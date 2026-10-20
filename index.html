@@ -1,0 +1,1335 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="KaryaKita — marketplace jasa kreatif pelajar">
+<title>KaryaKita — Jasa Kreatif Pelajar</title>
+
+<style>
+:root {
+  --ink: #20252b;
+  --muted: #69717d;
+  --line: #e7e9ed;
+  --soft: #f6f7f8;
+  --accent: #26685e;
+  --accent2: #e7f1ee;
+  --radius: 18px;
+  --shadow: 0 12px 35px rgba(25,35,40,.07);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  background: white;
+  line-height: 1.55;
+}
+
+button, input, select, textarea { font: inherit; }
+a { color: inherit; text-decoration: none; }
+
+.wrap {
+  width: min(1120px, calc(100% - 40px));
+  margin: auto;
+}
+
+.topbar {
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,.96);
+  z-index: 20;
+}
+
+.nav {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  font-size: 1.25rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.brand-mark {
+  width: 35px;
+  height: 35px;
+  border-radius: 11px;
+  background: var(--accent);
+  color: white;
+  display: grid;
+  place-items: center;
+}
+
+.navlinks {
+  display: flex;
+  gap: 22px;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  padding: 11px 16px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-primary:hover { background: #1c5149; }
+
+.btn-quiet {
+  border-color: var(--line);
+  background: white;
+  color: var(--ink);
+}
+
+.hero {
+  padding: 70px 0 55px;
+  background: linear-gradient(180deg, #f5faf8, white);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 45px;
+  align-items: center;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: .82rem;
+  font-weight: 800;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  line-height: 1.08;
+  letter-spacing: -.05em;
+  margin: 17px 0;
+}
+
+.hero h1 span { color: var(--accent); }
+
+.hero p {
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 25px 0;
+}
+
+.trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  color: var(--muted);
+  font-size: .85rem;
+}
+
+.hero-art {
+  min-height: 320px;
+  border-radius: 25px;
+  background: #eaf2ef;
+  padding: 25px;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.sample-card {
+  background: white;
+  padding: 18px;
+  width: min(300px, 100%);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  transform: rotate(-3deg);
+}
+
+.sample-cover {
+  height: 140px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #d4e7df, #f0d7a8);
+  display: grid;
+  place-items: center;
+  font-size: 4rem;
+}
+
+.sample-card h3 { margin-bottom: 5px; }
+
+.sample-card p {
+  margin: 5px 0 12px;
+  font-size: .9rem;
+}
+
+.price {
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.section { padding: 65px 0; }
+
+.section-soft { background: var(--soft); }
+
+.section-head { margin-bottom: 25px; }
+
+.section-head h2 {
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  letter-spacing: -.04em;
+  margin: 8px 0;
+}
+
+.section-head p {
+  color: var(--muted);
+  max-width: 550px;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.search { flex: 1; min-width: 190px; }
+
+.search input,
+.filter-select {
+  width: 100%;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0 12px;
+  background: white;
+}
+
+.filter-select { width: auto; }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.service-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: white;
+  transition: .2s;
+}
+
+.service-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-3px);
+}
+
+.service-art {
+  height: 150px;
+  display: grid;
+  place-items: center;
+  font-size: 3.5rem;
+}
+
+.art-design { background: #e5efeb; }
+.art-video { background: #f4e9d9; }
+.art-slide { background: #e8e8f5; }
+.art-social { background: #f5e6e8; }
+.art-photo { background: #e5edf5; }
+.art-logo { background: #e9eddf; }
+
+.service-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.category {
+  color: var(--accent);
+  font-size: .75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.service-body h3 { margin: 7px 0; }
+
+.service-body p {
+  color: var(--muted);
+  font-size: .9rem;
+  flex: 1;
+}
+
+.service-meta {
+  border-top: 1px solid var(--line);
+  padding-top: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.creator {
+  font-size: .8rem;
+  color: var(--muted);
+}
+
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+}
+
+.ai-grid {
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.ai-intro h2 {
+  font-size: 2.2rem;
+  line-height: 1.15;
+  letter-spacing: -.04em;
+}
+
+.ai-intro p { color: var(--muted); }
+
+.ai-panel {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 24px;
+  background: white;
+  box-shadow: var(--shadow);
+}
+
+.field { margin-bottom: 15px; }
+
+.field label {
+  display: block;
+  font-weight: 700;
+  font-size: .9rem;
+  margin-bottom: 7px;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  outline: none;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--accent);
+}
+
+.ai-result {
+  display: none;
+  margin-top: 18px;
+  background: var(--accent2);
+  border-radius: 13px;
+  padding: 16px;
+}
+
+.ai-result.show { display: block; }
+
+.result-list {
+  display: grid;
+  gap: 8px;
+}
+
+.result-item {
+  background: white;
+  padding: 10px;
+  border-radius: 9px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.step {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+.step-no {
+  background: var(--accent2);
+  color: var(--accent);
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+
+.step p { color: var(--muted); }
+
+.validation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.validation-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 23px;
+}
+
+.validation-card p {
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.checklist {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.check-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: .9rem;
+}
+
+.check-row input {
+  margin-top: 5px;
+  accent-color: var(--accent);
+}
+
+.calc-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.calc-result {
+  background: var(--soft);
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.big {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.note {
+  color: var(--muted);
+  font-size: .78rem;
+}
+
+.cta {
+  padding: 40px;
+  border-radius: 22px;
+  background: var(--accent);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.cta h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.cta p { color: #d6e8e2; }
+
+.cta .btn {
+  background: white;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.footer {
+  padding: 25px 0;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .85rem;
+}
+
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(18,28,29,.6);
+  z-index: 50;
+  padding: 20px;
+  overflow: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.open { display: flex; }
+
+.modal-box {
+  background: white;
+  width: min(520px, 100%);
+  border-radius: 18px;
+  padding: 24px;
+}
+
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.close {
+  border: 0;
+  background: var(--soft);
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.form-grid { margin-top: 20px; }
+
+.form-grid .btn { width: 100%; }
+
+.notice {
+  display: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: .9rem;
+  margin: 10px 0;
+}
+
+.notice.show { display: block; }
+.notice.error { background: #fff0ee; color: #9a3025; }
+.notice.success { background: var(--accent2); color: #245a4f; }
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  opacity: 0;
+  pointer-events: none;
+  background: #20252b;
+  color: white;
+  padding: 12px 17px;
+  border-radius: 12px;
+  z-index: 80;
+  transition: .2s;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 850px) {
+  .hero-grid, .ai-grid, .validation-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cards { grid-template-columns: repeat(2, 1fr); }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .navlinks { gap: 10px; }
+}
+
+@media (max-width: 580px) {
+  .wrap { width: calc(100% - 28px); }
+  .navlinks { display: none; }
+  .hero { padding: 40px 0; }
+  .hero h1 { font-size: 2.7rem; }
+  .cards, .steps { grid-template-columns: 1fr; }
+  .section { padding: 45px 0; }
+  .calc-fields { grid-template-columns: 1fr; }
+  .cta { flex-direction: column; align-items: flex-start; padding: 25px; }
+  .cta .btn { width: 100%; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="wrap nav">
+    <a class="brand" href="#beranda">
+      <span class="brand-mark">K</span>KaryaKita
+    </a>
+
+    <nav class="navlinks">
+      <a href="#layanan">Jelajahi jasa</a>
+      <a href="#ai">Asisten AI</a>
+      <a href="#cara-kerja">Cara kerja</a>
+      <a href="#validasi">Validasi bisnis</a>
+    </nav>
+
+    <a class="btn btn-primary" href="#layanan">Cari jasa ↗</a>
+  </div>
+</header>
+
+<main>
+
+<section class="hero" id="beranda">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">● Marketplace kreator muda</div>
+
+      <h1>Ide kreatifmu,<br>
+        <span>jadi karya nyata.</span>
+      </h1>
+
+      <p>
+        Temukan jasa desain, editing, dan kebutuhan digital
+        dari pelajar kreatif. Dukung talenta muda sambil
+        membuat proyekmu lebih mudah.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#layanan">
+          Jelajahi layanan →
+        </a>
+        <a class="btn btn-quiet" href="#ai">
+          Coba asisten AI ✦
+        </a>
+      </div>
+
+      <div class="trust">
+        <span>✓ Kreator pelajar</span>
+        <span>✓ Harga transparan</span>
+        <span>✓ Pesan via WhatsApp</span>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <div class="sample-card">
+        <div class="sample-cover">✳️</div>
+        <h3>Poster yang mencuri perhatian</h3>
+        <p>Desain kreatif untuk ide hebatmu.</p>
+        <div class="price">Mulai Rp25.000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="layanan">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Pilihan kreator</div>
+      <h2>Jasa yang kamu butuhkan</h2>
+      <p>
+        Pilih layanan sesuai kebutuhan dan anggaran.
+        Harga merupakan contoh untuk prototipe.
+      </p>
+    </div>
+
+    <div class="filters">
+      <div class="search">
+        <input id="searchInput" type="search"
+          placeholder="Cari desain, video, presentasi..."
+          aria-label="Cari layanan">
+      </div>
+
+      <select class="filter-select" id="categoryFilter">
+        <option value="semua">Semua kategori</option>
+        <option value="Desain">Desain grafis</option>
+        <option value="Video">Editing video</option>
+        <option value="Presentasi">Presentasi</option>
+        <option value="Sosial media">Konten sosial media</option>
+        <option value="Fotografi">Fotografi</option>
+        <option value="Branding">Branding</option>
+      </select>
+
+      <select class="filter-select" id="sortFilter">
+        <option value="default">Urutkan: pilihan</option>
+        <option value="low">Harga terendah</option>
+        <option value="high">Harga tertinggi</option>
+      </select>
+    </div>
+
+    <div class="cards" id="serviceGrid" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="section section-soft" id="ai">
+  <div class="wrap ai-grid">
+    <div class="ai-intro">
+      <div class="eyebrow">✦ Asisten pintar</div>
+      <h2>Bingung mulai dari mana?</h2>
+      <p>
+        Ceritakan kebutuhanmu. Asisten KaryaKita akan
+        menyarankan jenis jasa dan perkiraan anggaran
+        menggunakan simulasi tanpa API eksternal.
+      </p>
+      <p class="note">
+        Ini simulasi AI berbasis aturan, bukan model AI
+        yang terhubung ke internet.
+      </p>
+    </div>
+
+    <div class="ai-panel">
+      <div class="field">
+        <label for="needSelect">Apa yang ingin kamu buat?</label>
+        <select id="needSelect">
+          <option value="">Pilih kebutuhan</option>
+          <option value="promosi">Promosi usaha atau acara</option>
+          <option value="video">Video pendek media sosial</option>
+          <option value="tugas">Tugas sekolah atau presentasi</option>
+          <option value="identitas">Identitas visual untuk brand</option>
+          <option value="foto">Foto produk</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="budgetSelect">Anggaran yang tersedia</label>
+        <select id="budgetSelect">
+          <option value="50000">Di bawah Rp50.000</option>
+          <option value="100000">Rp50.000–Rp100.000</option>
+          <option value="250000">Rp100.000–Rp250.000</option>
+          <option value="500000">Di atas Rp250.000</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" id="recommendBtn" type="button">
+        Beri rekomendasi ✦
+      </button>
+
+      <div class="ai-result" id="aiResult" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="cara-kerja">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Mudah dan praktis</div>
+      <h2>Mulai dalam tiga langkah</h2>
+      <p>Alur sederhana untuk menghubungkan pelanggan dengan kreator.</p>
+    </div>
+
+    <div class="steps">
+      <article class="step">
+        <div class="step-no">01</div>
+        <h3>Temukan jasa</h3>
+        <p>Gunakan pencarian dan kategori untuk menemukan layanan.</p>
+      </article>
+
+      <article class="step">
+        <div class="step-no">02</div>
+        <h3>Isi kebutuhan</h3>
+        <p>Tentukan detail proyek, tenggat, dan kebutuhan pelanggan.</p>
+      </article>
+
+      <article class="step">
+        <div class="step-no">03</div>
+        <h3>Lanjut di WhatsApp</h3>
+        <p>Pesan yang disiapkan akan dibuka di WhatsApp.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft" id="validasi">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Uji kelayakan sederhana</div>
+      <h2>Ukur peluang bisnismu</h2>
+      <p>
+        Susun eksperimen awal dan hitung simulasi komisi marketplace.
+      </p>
+    </div>
+
+    <div class="validation-grid">
+      <div class="validation-card">
+        <h3>Checklist validasi pasar</h3>
+        <p>
+          Tandai aktivitas yang sudah dilakukan untuk
+          membedakan asumsi dengan bukti nyata.
+        </p>
+
+        <div class="checklist" id="validationChecklist">
+          <label class="check-row">
+            <input type="checkbox">
+            Wawancarai minimal 10 calon pelanggan.
+          </label>
+
+          <label class="check-row">
+            <input type="checkbox">
+            Tanyakan layanan dan harga yang dibutuhkan.
+          </label>
+
+          <label class="check-row">
+            <input type="checkbox">
+            Wawancarai minimal 5 calon kreator pelajar.
+          </label>
+
+          <label class="check-row">
+            <input type="checkbox">
+            Uji katalog dan tombol pemesanan.
+          </label>
+
+          <label class="check-row">
+            <input type="checkbox">
+            Catat minat nyata dari calon pelanggan.
+          </label>
+        </div>
+
+        <div class="calc-result">
+          <strong id="checkProgress">0 dari 5 aktivitas selesai</strong>
+          <p id="checkAdvice">
+            Mulai dengan wawancara calon pelanggan.
+          </p>
+        </div>
+      </div>
+
+      <div class="validation-card">
+        <h3>Kalkulator komisi</h3>
+        <p>
+          Perkirakan pendapatan marketplace berdasarkan
+          jumlah pesanan dan persentase komisi.
+        </p>
+
+        <div class="calc-fields">
+          <div class="field">
+            <label for="ordersInput">Pesanan per bulan</label>
+            <input id="ordersInput" type="number"
+              min="0" max="100000" value="20">
+          </div>
+
+          <div class="field">
+            <label for="averageInput">Rata-rata pesanan (Rp)</label>
+            <input id="averageInput" type="number"
+              min="0" max="100000000" step="1000" value="50000">
+          </div>
+
+          <div class="field">
+            <label for="commissionInput">Komisi (%)</label>
+            <input id="commissionInput" type="number"
+              min="0" max="100" value="10">
+          </div>
+        </div>
+
+        <div class="calc-result">
+          <small>Perkiraan komisi per bulan</small>
+          <div class="big" id="commissionResult">Rp100.000</div>
+          <small id="grossResult">Nilai transaksi: Rp1.000.000</small>
+        </div>
+
+        <p class="note">
+          Simulasi belum dikurangi biaya operasional, pajak,
+          refund, atau biaya pembayaran. Pendapatan tidak dijamin.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="cta">
+      <div>
+        <h2>Punya ide yang ingin diwujudkan?</h2>
+        <p>Temukan kreator yang tepat untuk proyekmu.</p>
+      </div>
+      <a class="btn" href="#layanan">Temukan jasa →</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-row">
+    <a class="brand" href="#beranda">
+      <span class="brand-mark">K</span>KaryaKita
+    </a>
+    <span>Prototipe edukasi wirausaha</span>
+    <span>© <span id="year"></span> KaryaKita</span>
+  </div>
+</footer>
+
+<div class="modal" id="orderModal" role="dialog"
+  aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <div class="eyebrow">Mulai proyek</div>
+        <h2 id="modalTitle">Pesan layanan</h2>
+        <p id="modalService"></p>
+      </div>
+      <button class="close" id="closeModal" aria-label="Tutup">×</button>
+    </div>
+
+    <form class="form-grid" id="orderForm" novalidate>
+      <input type="hidden" id="selectedService">
+
+      <div class="field">
+        <label for="customerName">Nama kamu *</label>
+        <input id="customerName" required maxlength="80"
+          placeholder="Contoh: Dinda">
+      </div>
+
+      <div class="field">
+        <label for="customerContact">Nomor WhatsApp kamu *</label>
+        <input id="customerContact" inputmode="tel"
+          required maxlength="20" placeholder="081234567890">
+      </div>
+
+      <div class="field">
+        <label for="projectDetail">Detail proyek *</label>
+        <textarea id="projectDetail" rows="3" required maxlength="600"
+          placeholder="Jelaskan kebutuhan dan tenggat proyek..."></textarea>
+      </div>
+
+      <div class="notice" id="formNotice" role="status"></div>
+
+      <button class="btn btn-primary" type="submit">
+        Siapkan pesan WhatsApp ↗
+      </button>
+
+      <p class="note">
+        Ganti nomor WhatsApp tujuan pada kode sebelum demo.
+      </p>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+// DATA LAYANAN CONTOH
+const services = [
+  {
+    id: 1,
+    title: "Desain Poster & Flyer",
+    category: "Desain",
+    desc: "Poster acara, promosi produk, atau kegiatan sekolah.",
+    price: 25000,
+    creator: "Nadia • Desain Grafis",
+    emoji: "✳️",
+    art: "art-design"
+  },
+  {
+    id: 2,
+    title: "Editing Video Pendek",
+    category: "Video",
+    desc: "Video Reels atau TikTok dengan potongan rapi.",
+    price: 50000,
+    creator: "Rafi • Multimedia",
+    emoji: "▶️",
+    art: "art-video"
+  },
+  {
+    id: 3,
+    title: "Desain Presentasi",
+    category: "Presentasi",
+    desc: "Slide terstruktur untuk tugas atau pitching.",
+    price: 30000,
+    creator: "Alya • Desain",
+    emoji: "▤",
+    art: "art-slide"
+  },
+  {
+    id: 4,
+    title: "Konten Sosial Media",
+    category: "Sosial media",
+    desc: "Visual feed untuk akun usaha yang konsisten.",
+    price: 40000,
+    creator: "Bima • Kreator Konten",
+    emoji: "▧",
+    art: "art-social"
+  },
+  {
+    id: 5,
+    title: "Foto Produk Sederhana",
+    category: "Fotografi",
+    desc: "Foto produk untuk katalog online.",
+    price: 60000,
+    creator: "Salsa • Fotografi",
+    emoji: "◉",
+    art: "art-photo"
+  },
+  {
+    id: 6,
+    title: "Logo & Identitas Brand",
+    category: "Branding",
+    desc: "Konsep logo untuk usaha kecil atau proyek sekolah.",
+    price: 75000,
+    creator: "Dio • Desain Grafis",
+    emoji: "✺",
+    art: "art-logo"
+  }
+];
+
+// GANTI DENGAN NOMOR WHATSAPP TUJUAN YANG BENAR.
+// Format: kode negara + nomor, tanpa tanda + atau spasi.
+const WHATSAPP_NUMBER = "6281234567890";
+
+const rupiah = n =>
+  new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0
+  }).format(Number(n) || 0);
+
+// KATALOG, PENCARIAN, DAN FILTER
+const grid = document.getElementById("serviceGrid");
+
+function renderServices() {
+  const query = document.getElementById("searchInput")
+    .value.trim().toLowerCase();
+
+  const category = document.getElementById("categoryFilter").value;
+  const sort = document.getElementById("sortFilter").value;
+
+  let list = services.filter(s =>
+    (category === "semua" || s.category === category) &&
+    [s.title, s.category, s.desc, s.creator]
+      .join(" ").toLowerCase().includes(query)
+  );
+
+  if (sort === "low") list.sort((a, b) => a.price - b.price);
+  if (sort === "high") list.sort((a, b) => b.price - a.price);
+
+  if (!list.length) {
+    grid.innerHTML =
+      '<div class="empty">Layanan tidak ditemukan. Coba kata kunci lain.</div>';
+    return;
+  }
+
+  grid.innerHTML = list.map(s => `
+    <article class="service-card">
+      <div class="service-art ${s.art}" aria-hidden="true">
+        ${s.emoji}
+      </div>
+      <div class="service-body">
+        <span class="category">${s.category}</span>
+        <h3>${s.title}</h3>
+        <p>${s.desc}</p>
+        <div class="service-meta">
+          <div>
+            <div class="creator">${s.creator}</div>
+            <div class="price">${rupiah(s.price)} / mulai</div>
+          </div>
+          <button class="btn btn-quiet order-btn"
+            data-id="${s.id}" type="button">Pesan</button>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+grid.addEventListener("click", e => {
+  const btn = e.target.closest(".order-btn");
+  if (btn) openOrder(Number(btn.dataset.id));
+});
+
+["searchInput", "categoryFilter", "sortFilter"].forEach(id => {
+  document.getElementById(id).addEventListener(
+    id === "searchInput" ? "input" : "change",
+    renderServices
+  );
+});
+
+// FORM PEMESANAN
+const modal = document.getElementById("orderModal");
+
+function openOrder(id) {
+  const s = services.find(x => x.id === id);
+  if (!s) return;
+
+  document.getElementById("selectedService").value = s.id;
+  document.getElementById("modalService").textContent =
+    `${s.title} • mulai ${rupiah(s.price)}`;
+
+  document.getElementById("formNotice").className = "notice";
+  modal.classList.add("open");
+  document.body.style.overflow = "hidden";
+  document.getElementById("customerName").focus();
+}
+
+function closeOrder() {
+  modal.classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+document.getElementById("closeModal")
+  .addEventListener("click", closeOrder);
+
+modal.addEventListener("click", e => {
+  if (e.target === modal) closeOrder();
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && modal.classList.contains("open")) {
+    closeOrder();
+  }
+});
+
+document.getElementById("orderForm").addEventListener("submit", e => {
+  e.preventDefault();
+
+  const name = document.getElementById("customerName").value.trim();
+  const contact = document.getElementById("customerContact").value.trim();
+  const detail = document.getElementById("projectDetail").value.trim();
+
+  const s = services.find(x =>
+    x.id === Number(document.getElementById("selectedService").value)
+  );
+
+  const notice = document.getElementById("formNotice");
+  const digits = contact.replace(/[^\d+]/g, "");
+
+  if (name.length < 2) {
+    showNotice(notice, "Nama minimal 2 karakter.", "error");
+    return;
+  }
+
+  if (digits.replace(/\D/g, "").length < 9) {
+    showNotice(notice, "Periksa nomor WhatsApp kamu.", "error");
+    return;
+  }
+
+  if (detail.length < 10) {
+    showNotice(notice, "Detail proyek minimal 10 karakter.", "error");
+    return;
+  }
+
+  if (!s) return;
+
+  const message =
+`Halo KaryaKita! Saya ingin memesan layanan.
+
+Layanan: ${s.title}
+Harga mulai: ${rupiah(s.price)}
+Nama: ${name}
+WhatsApp pemesan: ${contact}
+Detail proyek: ${detail}
+
+Mohon informasi ketersediaan dan harga final.`;
+
+  showNotice(
+    notice,
+    "Data valid. WhatsApp akan dibuka dengan pesan yang disiapkan.",
+    "success"
+  );
+
+  const url =
+    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+  setTimeout(() => {
+    window.open(url, "_blank", "noopener,noreferrer");
+    closeOrder();
+    showToast("Pesan disiapkan. Periksa nomor WhatsApp tujuan.");
+  }, 350);
+});
+
+function showNotice(el, msg, type) {
+  el.textContent = msg;
+  el.className = `notice show ${type}`;
+}
+
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+
+  setTimeout(() => t.classList.remove("show"), 3500);
+}
+
+// SIMULASI AI BERBASIS ATURAN
+const recMap = {
+  promosi: {
+    title: "Promosikan acara atau usaha",
+    categories: ["Desain", "Sosial media", "Branding"],
+    tip: "Siapkan nama produk, target audiens, ukuran desain, dan tanggal publikasi."
+  },
+  video: {
+    title: "Buat video pendek",
+    categories: ["Video", "Sosial media"],
+    tip: "Siapkan klip mentah, durasi, contoh gaya video, dan teks yang dibutuhkan."
+  },
+  tugas: {
+    title: "Rapikan tugas atau presentasi",
+    categories: ["Presentasi", "Desain"],
+    tip: "Siapkan topik, jumlah slide, bahan referensi, dan tenggat pengerjaan."
+  },
+  identitas: {
+    title: "Bangun identitas brand",
+    categories: ["Branding", "Desain"],
+    tip: "Siapkan nama brand, target pelanggan, dan contoh visual yang disukai."
+  },
+  foto: {
+    title: "Tampilkan produk lebih menarik",
+    categories: ["Fotografi", "Sosial media"],
+    tip: "Tentukan daftar produk, jumlah foto, latar, dan tujuan penggunaannya."
+  }
+};
+
+document.getElementById("recommendBtn").addEventListener("click", () => {
+  const need = document.getElementById("needSelect").value;
+  const budget = Number(document.getElementById("budgetSelect").value);
+  const result = document.getElementById("aiResult");
+
+  if (!need) {
+    result.classList.add("show");
+    result.innerHTML =
+      "<h3>Pilih kebutuhan terlebih dahulu</h3><p>Pilih jenis proyek untuk mendapatkan saran.</p>";
+    return;
+  }
+
+  const rec = recMap[need];
+
+  let matches = services.filter(s =>
+    rec.categories.includes(s.category) && s.price <= budget
+  );
+
+  if (!matches.length) {
+    matches = services
+      .filter(s => rec.categories.includes(s.category))
+      .sort((a, b) => a.price - b.price)
+      .slice(0, 2);
+  }
+
+  matches = matches.slice(0, 3);
+
+  result.innerHTML = `
+    <h3>${rec.title}</h3>
+    <p>${rec.tip}</p>
+    <p><strong>Rekomendasi jasa:</strong></p>
+    <div class="result-list">
+      ${matches.map(s => `
+        <div class="result-item">
+          <span>${s.title}</span>
+          <strong>${rupiah(s.price)}</strong>
+        </div>
+      `).join("")}
+    </div>
+    <p class="note">
+      Rekomendasi dibuat dari aturan sederhana dan katalog contoh,
+      bukan AI generatif.
+    </p>
+  `;
+
+  result.classList.add("show");
+});
+
+// CHECKLIST VALIDASI BISNIS
+const checklist = [
+  ...document.querySelectorAll("#validationChecklist input")
+];
+
+function updateChecklist() {
+  const n = checklist.filter(c => c.checked).length;
+
+  document.getElementById("checkProgress").textContent =
+    `${n} dari ${checklist.length} aktivitas selesai`;
+
+  let advice = "Mulai dengan wawancara calon pelanggan.";
+
+  if (n >= 3 && n < checklist.length) {
+    advice = "Sudah ada kemajuan. Lengkapi aktivitas yang tersisa.";
+  }
+
+  if (n === checklist.length) {
+    advice = "Bagus! Rangkum temuan dan tentukan eksperimen berikutnya.";
+  }
+
+  document.getElementById("checkAdvice").textContent = advice;
+}
+
+checklist.forEach(c =>
+  c.addEventListener("change", updateChecklist)
+);
+
+// KALKULATOR KOMISI MARKETPLACE
+function updateCommission() {
+  const orders = Math.max(0, Math.min(
+    100000,
+    Number(document.getElementById("ordersInput").value) || 0
+  ));
+
+  const avg = Math.max(0, Math.min(
+    100000000,
+    Number(document.getElementById("averageInput").value) || 0
+  ));
+
+  const pct = Math.max(0, Math.min(
+    100,
+    Number(document.getElementById("commissionInput").value) || 0
+  ));
+
+  const gross = orders * avg;
+  const commission = gross * pct / 100;
+
+  document.getElementById("commissionResult").textContent =
+    rupiah(commission);
+
+  document.getElementById("grossResult").textContent =
+    `Nilai transaksi: ${rupiah(gross)} • Komisi ${pct}%`;
+}
+
+["ordersInput", "averageInput", "commissionInput"].forEach(id => {
+  document.getElementById(id).addEventListener("input", updateCommission);
+});
+
+// INISIALISASI
+document.getElementById("year").textContent = new Date().getFullYear();
+
+renderServices();
+updateChecklist();
+updateCommission();
+</script>
+
+</body>
+</html>
